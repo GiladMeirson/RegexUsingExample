@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+
+
+                $("#phone").on("input", function() {
+                var pattern = $(this).attr("pattern");
+                var value = $(this).val();
+                var message = "Please match the requested format: " + pattern+" 05X-XXXXXXX";
+                this.setCustomValidity(value.match(pattern) ? "" : message);
+                });
+
+                $("#email").on("input", function() {
+                var pattern = $(this).attr("pattern");
+                var value = $(this).val();
+                var message = "Please match the requested format: " + pattern+" example123@example.com";
+                this.setCustomValidity(value.match(pattern) ? "" : message);
+                });
+
+
+                $("#myForm").submit(function(e) {
+
+
+                e.preventDefault();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Form submitted successfully'
+                    });
+         
+                
+                });
+   
+        });
+    </script>
+</head>
+<body>
+    <form id="myForm">
+        Email: <input type="text" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  required><br>
+        Phone: <input type="text" id="phone" name="phone" pattern="05\d-\d{7}" required><br>
+        Number: <input type="number" id="number" name="number" min="5" max="10" required><br>
+        Password: <input type="password" id="password" name="password" minlength="5" maxlength="8" required><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

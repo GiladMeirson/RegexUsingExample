@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $("#myForm").submit(function(e) {
+
+
+                e.preventDefault();
+
+                var email = $("#email").val();
+                var phone = $("#phone").val();
+
+                var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                var phoneRegex = /^05\d-\d{7}$/;
+
+                if (!emailRegex.test(email)) {
+                    swal.fire({
+                        icon: 'error',
+                        title: 'Invalid email'
+                    });
+                    
+                }
+
+                if (!phone) {
+                    swal.fire({
+                        icon: 'error',
+                        title: 'Invalid phone number'
+                    });
+                    
+                }
+
+                swal.fire({
+                    icon: 'success',
+                    title: 'Form submitted successfully'
+                });
+                
+            });
+
+
+            $("#phone2").on("input", function() {
+                var pattern = $(this).attr("pattern");
+                var value = $(this).val();
+                var message = "Please match the requested format: " + pattern+" 05X-XXXXXXX";
+                this.setCustomValidity(value.match(pattern) ? "" : message);
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="myForm">
+        Email: <input type="text" id="email" name="email" required><br>
+        Phone: <input type="text" id="phone" name="phone" pattern="05\d-\d{7}"><br>
+        Phone2: <input type="text" id="phone2" name="phone2" pattern="05\d-\d{7}"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
