@@ -23,37 +23,32 @@
                     });
                     
                 }
-
-                if (!phone) {
+                
+               else if (!phoneRegex.test(phone)) {
                     swal.fire({
                         icon: 'error',
                         title: 'Invalid phone number'
                     });
                     
                 }
-
-                swal.fire({
-                    icon: 'success',
-                    title: 'Form submitted successfully'
-                });
+                else{
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Form submitted successfully'
+                    });
+                }
                 
             });
 
 
-            $("#phone2").on("input", function() {
-                var pattern = $(this).attr("pattern");
-                var value = $(this).val();
-                var message = "Please match the requested format: " + pattern+" 05X-XXXXXXX";
-                this.setCustomValidity(value.match(pattern) ? "" : message);
-            });
+   
         });
     </script>
 </head>
 <body>
     <form id="myForm">
         Email: <input type="text" id="email" name="email" required><br>
-        Phone: <input type="text" id="phone" name="phone" pattern="05\d-\d{7}"><br>
-        Phone2: <input type="text" id="phone2" name="phone2" pattern="05\d-\d{7}"><br>
+        Phone: <input type="text" id="phone" name="phone" required><br>
         <input type="submit" value="Submit">
     </form>
 </body>
